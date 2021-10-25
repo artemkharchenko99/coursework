@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Students</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="main.js" defer></script>
+</head>
+<body>
+    <div id="app">
+		<input type="text" name="search" value="" v-model="search"><br>
+		<table class="table table-dark">
+			<tr v-for="item in students"  v-bind:key="item.id"> 
+				<td>{{item.name}}</td>
+                <td><input type="checkbox" v-model="item.isDonePr"></td>
+                <td>{{item.group}}</td>
+                <td><a href = "#" @click="deleteStudent(item._id)">Видалити</a></td>
+			</tr>
+		</table>
+
+		<input v-model="addForm.name">
+		<input type="checkbox" v-model="addForm.isDonePr">
+		<select v-model="addForm.group">
+			<option value="RPZ 18 1/9">RPZ 18 1/9</option>
+			<option value="RPZ 18 2/9">RPZ 18 2/9</option>
+		</select>
+		<button @click="addStudent()">Add student</button>
+
+		<div class="converter">
+			<h1>Currency Converter</h1>
+			<label class="label">
+				Enter Amount:
+				<input type="number" v-model="converter.amount" v-bind:onchange="resultConverter()">
+			</label>
+			<label class="label">
+				<select v-model="converter.from" @click="resultConverter()">
+					<option value="EUR">Euro</option>
+					<option value="USD">Dollar USA</option>
+					<option value="RUB">Rub</option>
+					<option value="UAH">Гривна</option>
+				</select>
+			</label>
+			<label class="label">
+				<select v-model="converter.to" @click="resultConverter()">
+					<option value="EUR">Euro</option>
+					<option value="USD">Dollar USA</option>
+					<option value="RUB">Rub</option>
+					<option value="UAH">Гривна</option>
+				</select>
+			</label>
+			<p>
+				<span>{{ `${converter.amount} ${converter.from}` }}</span>
+				equals
+				<span>{{ `${converter.result} ${converter.to}` }}</span>
+			</p>
+		</div>
+	</div>
+</body>
+</html>
